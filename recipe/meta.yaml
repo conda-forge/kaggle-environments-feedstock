@@ -1,5 +1,6 @@
 {% set name = "kaggle-environments" %}
-{% set version = "1.14.8" %}
+{% set version = "1.16.2" %}
+{% set python_min = "3.8" %}
 
 
 package:
@@ -7,8 +8,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/kaggle-environments-{{ version }}.tar.gz
-  sha256: 7044d1cd64657a7c3f342d65ca4388e1648871e63deb4be9c425d0d996cf7984
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/kaggle-environments-{{ version }}.tar.gz
+  sha256: e7e0436e03e3d04a198b0fc9dcd332a8228c51e0d7e17971fb8da07744bf6f05
 
 build:
   number: 0
@@ -20,15 +21,21 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
+    - setuptools
   run:
     - flask >=1.1.2
-    - gym
-    - ipython
     - jsonschema >=3.0.1
     - numpy >=1.19.5
-    - python >=3.6
+    - python >={{ python_min }}
     - requests >=2.25.1
+    - gymnasium =0.29.0
+    - pettingzoo =1.24.0
+    - scipy >=1.11.2
+    - shimmy >=1.2.1
+    - stable-baselines3 =2.1.0
+    - transformers >=4.33.1
+    - Chessnut >=0.4.1
 
 test:
   imports:
@@ -37,6 +44,7 @@ test:
     - pip check
     - kaggle-environments --help
   requires:
+    - python {{ python_min }}
     - pip
 
 about:
